@@ -1,6 +1,9 @@
 # track_and_trace_project
 Kaunas Coding School project
 
+Priskirti kodui reikšmes:
+code: Pavadinimas; serija; galiojimas
+
 
 Nuskaityti gaunamus kodus
 Registruoti gaunamus kodus
