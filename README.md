@@ -1,5 +1,7 @@
 # track_and_trace_project
-Kaunas Coding School project
+link to github.com [github]
+https://github.com/Fumitus/track_and_trace_project
+## Kaunas Coding School project
 
 Priskirti kodui reikšmes:
 code: Pavadinimas; serija; galiojimas
