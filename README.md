@@ -3,13 +3,43 @@ link to github.com [github]
 https://github.com/Fumitus/track_and_trace_project
 ## Kaunas Coding School project
 
-Priskirti kodui reikšmes:
-code: Pavadinimas; serija; galiojimas
+- Priskirti kodui reikšmes:
+    - code: Pavadinimas; serija; galiojimas
+
+```
+|kinta  |    pastovus duomenys serijai     |
+|  code |Product name|Batch number|Exp date|
+|-------|------------|------------|--------|
+|0000000|   content  |   content  |content |
+|-------|------------|------------|--------|
+|0000011|   content  |   content  |content |
+|-------|------------|------------|--------|
+```
+
+## Registruoti gaunamus kodus
+- sugeneruotus kodus išsaugoti
+```py
+def write_data(df):
+    df.to.csv('Outpu_name.csv')
+```
+
+## Nuskaityti gaunamus kodus
+
+- nuskaityti gaunamus duomenis
+```py
+def read_data():
+    pd.read_csv('file.csv')
+```
+
+## Sukurti DatFrame iš turimų duomenų
+
+```py
+def table():
+    pd.DataFrame()
+
+## Code Agregation
 
 
-Nuskaityti gaunamus kodus
-Registruoti gaunamus kodus
-kodams priskirti info: serija, galiojimo laikas, pavadinimas
 
 sugrupuoti 2D kodus ir naujai grupei suteikti naują kodą
 prieš suteikiant naują kodą patikrinti ar jis nėra panaudotas
