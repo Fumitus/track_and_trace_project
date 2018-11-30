@@ -3,17 +3,29 @@ link to github.com [github]
 https://github.com/Fumitus/track_and_trace_project
 ## Kaunas Coding School project
 
-- Priskirti kodui reikšmes:
-    - code: Pavadinimas; serija; galiojimas
+- nuskaityti `kodus` iš failo
+    - Įvesti `seriją`, `Pavadinimą` ir `galiojimo datą`
+        - sujungti `kodą` + `serija` + `Pavadinimą` + `galiojimo datą` į vieną kodą
+
 
 ```
-|kinta  |    pastovus duomenys serijai     |
-|  code |Product name|Batch number|Exp date|
-|-------|------------|------------|--------|
-|0000000|   content  |   content  |content |
-|-------|------------|------------|--------|
-|0000011|   content  |   content  |content |
-|-------|------------|------------|--------|
+|kinta  |    pastovus duomenys serijai     |                      |             
+|  code |Product name|Batch number|Exp date|    Pakuotės kodas    |
+|-------|------------|------------|--------|----------------------|
+|0000000|   content  |   content  |content |                      |
+|-------|------------|------------|--------|----------------------|
+|0000011|   content  |   content  |content |                      |
+|-------|------------|------------|--------|----------------------|
+```
+
+## Kintamieji
+- įvesti serijos duomenis: `serija`, `pavadinimas`, `galiojimo laikas`
+
+```py
+def batch_data('n'):
+    input(`serija`)
+    input(`pavadinimas`)
+    input(`galiojimas laikas`)
 ```
 
 ## Registruoti gaunamus kodus
