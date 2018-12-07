@@ -4,14 +4,17 @@ https://github.com/Fumitus/track_and_trace_project
 ## Kaunas Coding School project
 
 - nuskaityti `kodus` iš failo
-    - Įvesti `seriją`, `Pavadinimą` ir `galiojimo datą`
-        - sujungti `code` + `serija` + `Pavadinimą` + `galiojimo datą` į vieną `Product Code`
-        - prieš sujungiant kintamuosius su `code` patikrinti ar `code` nebuvo panaudotas kitam `Product Code` sukurti.
-
+    - Įvesti `seriją`, `product_name` ir `galiojimo datą`
+        - sujungti `code` + `product_name` + `galiojimo datą` į vieną `Product_code`
+        - prieš sujungiant kintamuosius su `code` patikrinti ar `code` nebuvo panaudotas kitam `Product_code` sukurti.
+    
+    
+    
+    Sukurti naują duomenų faila kuriame atsispindėtų kur panaudotas `code`:
 
 ```
 |-----------------------------------------------------------------|
-|  code |Product name|Batch number|Exp date|    Product Code      |
+|  code |Product name|    Batch   |Exp date|    Product Code      |
 |-------|------------|------------|--------|----------------------|
 |0000000|   content1 |   content2 |content3|   code+c1+c2+c3      |
 |-------|------------|------------|--------|----------------------|
