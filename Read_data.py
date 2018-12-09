@@ -1,5 +1,13 @@
 import pandas as pd
 
+def product_code(name, batch, expire):
+    """
+    ENter batch data and store in variables
+    """
+    product_name = name.capitalize().strip()
+    batch_code = batch+expire
+    return product_name, batch_code
+
 product_code(input('Product name: '), input('Product batch: '), input('Expire date: '))
 
 def read_code(code):
@@ -7,16 +15,7 @@ def read_code(code):
     return codes
 read_code('codes.csv')
 
-def product_code(name, batch, expire):
-    """
-    ENter batch data and store in variables
-    """
-    product_name = name.capitalize().strip()
-    batch_code = batch+expire
-    return product_name, batch_code 
-
-
-
+ 
 product_code=pd.DataFrame({'Batch and expire': ['0'],
                           'Product Code': ['0'],
                           'Product name': ['0'],
