@@ -9,7 +9,7 @@ def product_code_lines(name, batch, expire):
     batch_and_expire = str(batch+'/'+expire)
 
     product_code = batch_and_expire+'/'+code_from_file
-    
+
     product_code_frame=pd.DataFrame({
                                 'Code': [code_from_file],
                                 'Batch and expire': [batch_and_expire],
