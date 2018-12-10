@@ -61,6 +61,8 @@ def write_data():
 ```py
 def table():
     pd.DataFrame()
+```
+
 
 ## Product Code Agregation
 
