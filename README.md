@@ -31,7 +31,7 @@ def batch_data('n'):
     input(`pavadinimas`)
     input(`galiojimas laikas`)
 ```
-- Produkto pavadinimą panaudojant `import string` ir `string.ascii_letters` paversti skaičių eilute.
+
 ```py
 def word_to_numbers():
 ```
