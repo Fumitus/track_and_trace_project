@@ -85,6 +85,18 @@ print(product_code_frame['Pallet_code'])
 
 
 
+# Arturo mintis csv generavimui
+
+
+with open('names.csv', 'w') as csvfile:
+   fieldnames = ['first_name', 'last_name', 'date']
+   writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+   writer.writeheader()
+   writer.writerow({'first_name': 'Baked', 'last_name': 'Beans', 'date': '1992'})
+   writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam', 'date': '1992'})
+   writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam', 'date': '1992'})
+
 
 
 
