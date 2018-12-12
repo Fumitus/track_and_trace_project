@@ -13,10 +13,10 @@ https://github.com/Fumitus/track_and_trace_project
     Sukurti naują duomenų faila kuriame atsispindėtų kur panaudotas `code`:
 
 ```
-|-----------------------------------------------------------------|
-|  code |Product name|    Batch   |Exp date|    Product Code      |
-|-------|------------|------------|--------|----------------------|
-|0000000|   content1 |   content2 |content3|   code+c1+c2+c3      |
+|-----------------------------------------------------------------|               |                |
+|  code |Product name|    Batch   |Exp date|    Product Code      |   Box_code    |   Pallet_code  |
+|-------|------------|------------|--------|----------------------|---------------|----------------|
+|0000000|       c1   |     c2     |   c3   |   code+c1+c2+c3      | code+c1+c2+c3 | code+c1+c2+c3  |
 |-------|------------|------------|--------|----------------------|
 |0000011|   content1 |   content2 |content3|   code+c1+c2+c3      |
 |-------|------------|------------|--------|----------------------|

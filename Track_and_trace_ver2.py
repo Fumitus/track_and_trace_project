@@ -44,13 +44,13 @@ expire = '2020/12'
 
 
 
-def join_pallet(box_code):
-    pallet = []
-    while pallet <= 10:
-        pallet.append(box_code)
-    else:
-        pallet_code = batch_and_expire +'/'+ code_from_file
-    return pallet_code
+# def join_pallet(box_code):
+#     pallet = []
+#     while pallet <= 10:
+#         pallet.append(box_code)
+#     else:
+#         pallet_code = batch_and_expire +'/'+ code_from_file
+#     return pallet_code
 
 product_code = ['0000000SARIDONAAAAA20202020', 
                 '0000001SARIDONAAAAA20202020', 
@@ -64,7 +64,14 @@ pallet_code =['0000009SARIDONAAAAA20202020']
 
 
 
-product_code_frame = {'Code': [], 'Product name': [], 'Batch': [], 'Exp date': [], 'Product Code': [], 'Box_code': [], 'Pallet_code': []}
+product_code_frame = {'Code': [],
+                    'Product name': [], 
+                    'Batch': [], 
+                    'Exp date': [], 
+                    'Product Code': [], 
+                    'Box_code': [], 
+                    'Pallet_code': []}
+                    
 product_code_frame['Code'].append(product_code)
 product_code_frame['Product name'].append(name)
 product_code_frame['Batch'].append(batch)
