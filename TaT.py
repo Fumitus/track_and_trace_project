@@ -26,6 +26,19 @@ def join_product_code(product, lines):
 product_code = join_product_code(product=product, lines=lines)
 print(product_code)
 
+
+
+def create_used_codes_reg(product_code=join_product_code, new_filename='product_codes.txt'):
+    
+    file = open(new_filename, 'a')
+    lines = open_not_used_codes()
+    n_lines = lines[0]
+    file.write(n_lines+'\n')
+    file.close()
+    return n_lines
+
+n_lines = create_used_codes_reg()
+
 def delete_used_codes(filename='codes.txt'):
     file = open(filename, 'r')
     contents = file.readlines()
@@ -40,12 +53,3 @@ def delete_used_codes(filename='codes.txt'):
     return filename
 
 filename = delete_used_codes()
-
-def create_used_codes_reg(filename='product_codes.txt', product_code):
-
-    file = open(filename, 'w+')
-    n_lines = file.write(product_code)
-    file.close()
-    return n_lines
-
-create_used_codes_reg(filename, product_code)
