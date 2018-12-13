@@ -1,7 +1,12 @@
 import sys
 import argparse
 
-name, batch, expire = sys.argv[1:]
+parser = argparse.ArgumentParser(prog='TaT.py')
+parser.add_argument('name batch expire')
+parser.parse_args('name batch expire'.split())
+args = parser.parse_args()
+
+#name, batch, expire = sys.argv[1:]
 
 print(name, batch, expire)
 
