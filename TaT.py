@@ -1,22 +1,21 @@
 import sys
 import argparse
 
-parser = argparse.ArgumentParser(prog='Track_and_trace_program', description='Enter product parameters for %(prog)s')
-args = parser.parse_args()
-parser.add_argument('name', metavar='N', type=str, nargs='+',
+parser = argparse.ArgumentParser(prog='Track_and_trace_program', 
+                                description='Enter product parameters for %(prog)s')
+parser.add_argument('product name', action='append',
                     help='Product name must be entered')
-parser.add_argument('batch', metavar='N', type=str, nagrs= '+', 
+name=parser.parse_args('product name'.split())
+parser.add_argument('product batch', action='append', 
                     help= 'Product batch in format yyyymmdd must be entered')
-parser.add_argument('expire', metavar='N', type=str, nagrs= '+', 
+batch = parser.parse_args('product batch'.split())
+parser.add_argument('product expire', action='append', 
                     help= 'Product expire date in format yyyymm must be entered')
-
+expire=parser.parse_args('product expire'.split())
 parser.print_help()
-args = parser.parse_args('name batch expire '.split())
-print(args.ghghh(args.integers))
 
 
-
-name, batch, expire = args #sys.argv[1:]
+#name, batch, expire = args #sys.argv[1:]
 
 print(name, batch, expire)
 
