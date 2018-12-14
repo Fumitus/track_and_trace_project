@@ -14,11 +14,11 @@ print(args.Product_name, args.Product_batch, args.Product_expire)
 parser.print_help()
 
 
-name = args[0]
-batch = args[1]
-expire = args[2] #sys.argv[1:]
-
-print(name, batch, expire)
+name = args.Product_name
+batch = args.Product_batch
+expire = args.Product_expire
+# name, batch, expire = sys.argv[1:]
+# print(name, batch, expire)
 
 def join_product_code_data(name, batch, expire):
     product = name + batch + expire
