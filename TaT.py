@@ -1,12 +1,22 @@
 import sys
 import argparse
 
-parser = argparse.ArgumentParser(prog='TaT.py')
-parser.add_argument('name batch expire')
-parser.parse_args('name batch expire'.split())
+parser = argparse.ArgumentParser(prog='Track_and_trace_program', description='Enter product parameters for %(prog)s')
 args = parser.parse_args()
+parser.add_argument('name', metavar='N', type=str, nargs='+',
+                    help='Product name must be entered')
+parser.add_argument('batch', metavar='N', type=str, nagrs= '+', 
+                    help= 'Product batch in format yyyymmdd must be entered')
+parser.add_argument('expire', metavar='N', type=str, nagrs= '+', 
+                    help= 'Product expire date in format yyyymm must be entered')
 
-#name, batch, expire = sys.argv[1:]
+parser.print_help()
+args = parser.parse_args('name batch expire '.split())
+print(args.ghghh(args.integers))
+
+
+
+name, batch, expire = args #sys.argv[1:]
 
 print(name, batch, expire)
 
@@ -31,8 +41,6 @@ def join_product_code(product, lines):
 
 product_code = join_product_code(product=product, lines=lines)
 print(product_code)
-
-
 
 def create_used_codes_reg(new_filename='used_codes.txt'):
     
