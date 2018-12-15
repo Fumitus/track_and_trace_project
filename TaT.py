@@ -20,7 +20,21 @@ def main(passed_args=None):
 
 if __name__ == '__main__':
     main()
+
+def counter(func):
     
+    """
+    A decorator that counts and prints the number of times a function has been executed
+    """
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        res = func(*args, **kwargs)
+        print("{0} has been used: {1}x".format(func.__name__, wrapper.count))
+        print(res)
+        return res
+    wrapper.count = 0
+    return wrapper
+
 name, batch, expire = main()
 
 def join_product_code_data(name, batch, expire):
@@ -37,6 +51,7 @@ product = join_product_code_data(name, batch, expire)
 lines = open_not_used_codes()
 print(lines)
 
+@counter
 def join_product_code(product, lines):
     first_line = lines[0]
     product_code = product + '/' + first_line
@@ -45,15 +60,17 @@ def join_product_code(product, lines):
 product_code = join_product_code(product=product, lines=lines)
 print(product_code)
 
+@counter
 def create_box_code(product, lines):
     first_line = lines[0]
-    box_code = product + '/' + first_line + 'box'
-    return box_code    
+    box_code = product + '/' + first_line + '/box'
+    return box_code
 
+@counter
 def create_pallet_code(product, lines):
     first_line = lines[0]
-    pallet_code = product + '/' + first_line + 'pallet'
-    return box_code
+    pallet_code = product + '/' + first_line + '/pallet'
+    return pallet_code
 
 def create_used_codes_reg(new_filename='used_codes.txt'):
     
@@ -81,7 +98,7 @@ def delete_used_codes(filename='codes.txt'):
 
 filename = delete_used_codes()
 
-def create_product_codes_reg(product_code=product_code, new_filename='product_codes.txt'):
+def create_product_codes_reg(product_code, new_filename='product_codes.txt'):
     
     file = open(new_filename, 'a')
     product_code_lines = product_code
@@ -90,6 +107,24 @@ def create_product_codes_reg(product_code=product_code, new_filename='product_co
     file.close()
     return product_code_lines
 
-product_code_lines = create_product_codes_reg()
+# PRODUCT_CODES_GENERATED = 0
+# BOX_CODES_GENERATED = 0
+# PALLET_CODES_GENERATED = 0
+
+# def code_counter():
+#     global PRODUCT_CODES_GENERATED
+#     PRODUCT_CODES_GENERATED +=1
+
+#     global BOX_CODES_GENERATED
+#     global PALLET_CODES_GENERATED
+ 
+#     BOX_CODES_GENERATED +=1
+#     PALLET_CODES_GENERATED +=1
+
+#     pass
+
+product_code_lines = create_product_codes_reg(product_code)
+
+
 
 
