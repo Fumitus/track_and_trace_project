@@ -1,24 +1,27 @@
 import sys
 import argparse
 
-parser = argparse.ArgumentParser(prog='Track_and_trace_program', 
+def main(passed_args=None):
+
+    parser = argparse.ArgumentParser(prog='Track_and_trace_program', 
                                 description='Enter product parameters for %(prog)s')
-parser.add_argument('Product_name', action='append', 
+    parser.add_argument('Product_name', action='append', 
                     help='Enter product name in Latin letters')
-parser.add_argument('Product_batch', action='append', 
+    parser.add_argument('Product_batch', action='append', 
                     help='Enter product batch')
-parser.add_argument('Product_expire', action='append', 
+    parser.add_argument('Product_expire', action='append', 
                     help='Enter product expire date in format YYYY/MM')
-args = parser.parse_args()
-print(args.Product_name, args.Product_batch, args.Product_expire)
-parser.print_help()
+    
+    args = parser.parse_args(passed_args)
+        
+    if args.Product_name and args.Product_batch and args.Product_expire: 
+        name, batch, expire = args.Product_name[0], args.Product_batch[0], args.Product_expire[0] 
+        return name, batch, expire
 
-
-name = args.Product_name
-batch = args.Product_batch
-expire = args.Product_expire
-name, batch, expire = sys.argv[1:]
-print(name, batch, expire)
+if __name__ == '__main__':
+    main()
+    
+name, batch, expire = main()
 
 def join_product_code_data(name, batch, expire):
     product = name + batch + expire
@@ -41,6 +44,16 @@ def join_product_code(product, lines):
 
 product_code = join_product_code(product=product, lines=lines)
 print(product_code)
+
+def create_box_code(product, lines):
+    first_line = lines[0]
+    box_code = product + '/' + first_line + 'box'
+    return box_code    
+
+def create_pallet_code(product, lines):
+    first_line = lines[0]
+    pallet_code = product + '/' + first_line + 'pallet'
+    return box_code
 
 def create_used_codes_reg(new_filename='used_codes.txt'):
     
@@ -78,3 +91,5 @@ def create_product_codes_reg(product_code=product_code, new_filename='product_co
     return product_code_lines
 
 product_code_lines = create_product_codes_reg()
+
+
