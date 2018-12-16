@@ -90,8 +90,6 @@ def create_pallet_code(product=product, lines=lines, box_size=3):
     pallet_code = product + '/' + first_line + '/pallet'
     return pallet_code
 
-
-
 def create_used_codes_reg(new_filename='used_codes.txt'):
     """
     Function to register used unique codes.
