@@ -4,28 +4,27 @@ import csv
 
 
 
-def main(passed_args=None):
+def create_argument_parser():
+    parser = argparse.ArgumentParser(
+        prog='Track_and_trace_program', 
+        description='Enter product parameters for %(prog)s')
 
-    parser = argparse.ArgumentParser(prog='Track_and_trace_program', 
-                                description='Enter product parameters for %(prog)s')
-    parser.add_argument('Product_name', action='append', 
-                    help='Enter product name in Latin letters')
-    parser.add_argument('Product_batch', action='append', 
-                    help='Enter product batch')
-    parser.add_argument('Product_expire', action='append', 
-                    help='Enter product expire date in format YYYY/MM')
-    
-    args = parser.parse_args(passed_args)
-        
-    if args.Product_name and args.Product_batch and args.Product_expire: 
-        name, batch, expire = args.Product_name[0], args.Product_batch[0], args.Product_expire[0] 
-        return name, batch, expire
+    parser.add_argument('name', help='Enter product name in Latin letters')
+    parser.add_argument('batch', help='Product batch')
+    parser.add_argument('expiration', 
+                        help='Product expire date in format YYYY/MM')
+    return parser
+
+def main(passed_args=None):
+    argument_parser = create_argument_parser()    
+    args = argument_parser.parse_args()
+    print(args.name, args.batch, args.expire)
 
 if __name__ == '__main__':
     main()
 
-name, batch, expire = main()
 
+name, batch, expire = main()
 
 def join_product_code_data(name, batch, expire):
     """
