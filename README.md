@@ -1,18 +1,6 @@
 # track_and_trace_project
 
-<<<<<<< HEAD
-```
-|-----------------------------------------------------------------|               |                |
-|  code |Product name|    Batch   |Exp date|    Product Code      |   Box_code    |   Pallet_code  |
-|-------|------------|------------|--------|----------------------|---------------|----------------|
-|0000000|       c1   |     c2     |   c3   |   code+c1+c2+c3      | code+c1+c2+c3 | code+c1+c2+c3  |
-|-------|------------|------------|--------|----------------------|
-|0000011|   content1 |   content2 |content3|   code+c1+c2+c3      |
-|-------|------------|------------|--------|----------------------|
-```
-=======
 Šis projektas yra Kaunas Coding School Python kursų dalis
->>>>>>> e39831236be4690a079b73d15c907469a5b4529d
 
 Kodų panaudojimo sekimo programa. Gaunas riboto naudojimo kodų kiekis. Kodus reikia naudoti įvedant produktą(seriją, pavadinimą ir galiojimo datą). Apjungiant produkto pavadinimo ir galiojimo datos turi būtu sukuriamas produkto kodas (`code` + `product_name` + `galiojimo datą` į vieną `Product_code`
 
