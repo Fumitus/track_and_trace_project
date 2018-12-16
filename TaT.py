@@ -18,15 +18,14 @@ def create_argument_parser():
 def main(passed_args=None):
     argument_parser = create_argument_parser()    
     args = argument_parser.parse_args()
-    print(args.name, args.batch, args.expire)
+    print(args.name, args.batch, args.expiration)
+
 
 if __name__ == '__main__':
     main()
 
 
-name, batch, expire = main()
-
-def join_product_code_data(name, batch, expire):
+def join_product_code_data(name, batch, expiration):
     """
     Function to join product data from input
     """
