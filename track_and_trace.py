@@ -22,7 +22,7 @@ def open_not_used_codes(filename="data/codes.txt"):
     """
 
     with open(filename, "r") as f:
-        lines = file.read().split("\n")
+        lines = f.read().split("\n")
     return lines
 
 
@@ -73,7 +73,7 @@ def create_used_codes_reg(new_filename="data/used_codes.txt"):
     lines = open_not_used_codes()
     n_lines = lines[0]
     with open(new_filename, "a") as f:
-        file.write(n_lines + "\n")
+        f.write(n_lines + "\n")
     return n_lines
 
 
@@ -83,14 +83,13 @@ def delete_used_codes(filename="data/codes.txt"):
     from a not used codes list.
     """
     with open(filename, "r") as f:
-        contents = file.readlines()
+        contents = f.readlines()
+        # remove the line item from list, by line number, starts from 0
+        contents.pop(0)
 
-    # remove the line item from list, by line number, starts from 0
-    contents.pop(0)
-
-    with open(filename, "w"):
-        file.write(contents)
-    contents = "".join(contents)
+    with open(filename, "w") as f:
+        contents = "".join(contents)
+        f.write(contents)
 
     return filename
 
@@ -102,7 +101,7 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
     """
     product_code_lines = product_code
     with open(new_filename, "a") as f:
-        file.write(product_code + "\n")
+        f.write(product_code + "\n")
 
     return product_code_lines
 
