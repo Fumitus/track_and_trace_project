@@ -3,6 +3,7 @@ import argparse
 import csv
 
 
+
 def main(passed_args=None):
 
     parser = argparse.ArgumentParser(prog='Track_and_trace_program', 
@@ -23,21 +24,8 @@ def main(passed_args=None):
 if __name__ == '__main__':
     main()
 
-def counter(func):
-    
-    """
-    A decorator that counts and prints the number of times a function has been executed
-    """
-    def wrapper(*args, **kwargs):
-        wrapper.count += 1
-        res = func(*args, **kwargs)
-        print("{0} has been used: {1}x".format(func.__name__, wrapper.count))
-        return res
-    wrapper.count = 0
-    print(wrapper())
-    return wrapper
-
 name, batch, expire = main()
+
 
 def join_product_code_data(name, batch, expire):
     """
@@ -59,20 +47,23 @@ product = join_product_code_data(name, batch, expire)
 lines = open_not_used_codes()
 print(lines)
 
-@counter
+PRODUCT_CODES = 0
 def join_product_code(product=product, lines=lines):
+    global PRODUCT_CODES
+    PRODUCT_CODES += 1
     """"
     Function to produce `product_code` 
     from uniques code and data from input
-    """
+    """   
     first_line = lines[0]
     product_code = product + '/' + first_line
     return product_code
 
 product_code = join_product_code()
 print(product_code)
+print(PRODUCT_CODES)
 
-@counter
+
 def create_box_code(product=product, lines=lines, box_size=3):
     """"
     Function to produce `box_code` 
@@ -82,12 +73,12 @@ def create_box_code(product=product, lines=lines, box_size=3):
     box_code = product + '/' + first_line + '/box'
     return box_code
 
+if PRODUCT_CODES == 3:
+    box_code = create_box_code()
+else:
+    box_code = None
 
-box_code = create_box_code()
 
-
-
-@counter
 def create_pallet_code(product=product, lines=lines, box_size=3):
     """"
     Function to produce `pallet_code` 
@@ -99,7 +90,7 @@ def create_pallet_code(product=product, lines=lines, box_size=3):
     pallet_code = product + '/' + first_line + '/pallet'
     return pallet_code
 
-pallet_code = create_pallet_code()
+
 
 def create_used_codes_reg(new_filename='used_codes.txt'):
     """
@@ -147,7 +138,7 @@ def create_product_codes_reg(product_code, new_filename='product_codes.txt'):
 
 product_code_lines = create_product_codes_reg(product_code)
 
-def TaT_data_csv(filename='Tat_data.csv'):
+def TaT_data_csv(filename='Tat_data.csv', pallet_code=None):
     import os.path
 
     """
