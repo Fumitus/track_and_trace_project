@@ -34,7 +34,7 @@ def join_product_code_data(name, batch, expire):
     return product
 
 
-def join_product_code(lines, product):
+def join_product_code(product, lines):
     """"
     Function to produce `product_code` 
     from uniques code and data from input
@@ -44,7 +44,7 @@ def join_product_code(lines, product):
     return product_code
 
 
-def create_box_code(product, lines, box_size=3):
+def create_box_code(product, lines):
     """"
     Function to produce `box_code` 
     from uniques code, data from input and box size.
@@ -54,7 +54,7 @@ def create_box_code(product, lines, box_size=3):
     return box_code
 
 
-def create_pallet_code(product, lines, box_size=3):
+def create_pallet_code(product, lines):
     """"
     Function to produce `pallet_code` 
     from uniques code, data from input and pallet size.
@@ -139,6 +139,7 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
+
     lines = open_not_used_codes()
     product_code = join_product_code(product, lines)
     delete_used_codes()
