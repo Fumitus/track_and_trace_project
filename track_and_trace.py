@@ -15,16 +15,6 @@ def create_argument_parser():
     parser.add_argument("expiration", help="Product expire date in format YYYY/MM")
     return parser
 
-
-# def open_not_used_codes(filename="data/codes.txt"):
-#     """
-#     Function to read unique codes from a file
-#     """
-
-#     with open(filename, "r") as f:
-#         lines = f.read().split("\n")
-#     return lines
-
 def code_management(filename="data/codes.txt", used_codes_filename="data/used_codes.txt"):
     """
     Function to read unique code from file
@@ -84,41 +74,12 @@ def create_pallet_code(product, lines):
     pallet_code = product + "/" + first_line + "/pallet"
     return pallet_code
 
-
-# def create_used_codes_reg(new_filename="data/used_codes.txt"):
-#     """
-#     Function to register used unique codes.
-#     """
-
-#     lines = open_not_used_codes()
-#     n_lines = lines[0]
-#     with open(new_filename, "a") as f:
-#         f.write(n_lines + "\n")
-#     return n_lines
-
 def stuff():
     """
     Funtion to group product_codes and assign to box_code
     and latter group box_codes and assign to pallet_code
     """
     pass 
-
-# def delete_used_codes(filename="data/codes.txt"):
-#     """
-#     Function to delete used unique codes 
-#     from a not used codes list.
-#     """
-#     with open(filename, "r") as f:
-#         contents = f.readlines()
-#         # remove the line item from list, by line number, starts from 0
-#         contents.pop(0)
-
-#     with open(filename, "w") as f:
-#         contents = "".join(contents)
-#         f.write(contents)
-
-#     return filename
-
 
 def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"):
     """
