@@ -26,7 +26,7 @@ def code_management(filename="data/codes.txt", used_codes_filename="data/used_co
         # remove the line item from list, by line number, starts from 0 
         # and returns it's value
         pop_value = contents.pop(0)
-        n_lines = pop_value
+        lines = pop_value.strip()
         
         with open(used_codes_filename, "a") as f:
             f.write(pop_value)
@@ -34,7 +34,7 @@ def code_management(filename="data/codes.txt", used_codes_filename="data/used_co
     with open(filename, "w") as f:
         contents = "".join(contents)
         f.write(contents)
-    return n_lines
+    return lines
 
 def join_product_code_data(name, batch, expire):
     """
@@ -59,7 +59,7 @@ def create_box_code(product, lines):
     Function to produce `box_code` 
     from uniques code, data from input and box size.
     """
-    first_line = lines[0]
+    first_line = lines
     box_code = product + "/" + first_line + "/box"
     return box_code
 
@@ -88,7 +88,7 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
     """
     product_code_lines = product_code
     with open(new_filename, "a") as f:
-        f.write(product_code + "\n")
+        f.write(product_code_lines + "\n")
 
     return product_code_lines
 
