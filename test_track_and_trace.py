@@ -28,6 +28,15 @@ class TestCase(unittest.TestCase):
         result = track_and_trace.create_pallet_code('a', 'b')
         self.assertEqual(result, 'a/b/pallet')
         print(result)
+
+    def test_stuff(self):
+
+        box_list = ['APAP20181215202012/100,025/box'],
+        product_code_list = ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']
+
+        expected_result = {'APAP20181215202012/100,025/box': ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']}
+        result = stuff(box_list, product_code_list)
+        self.assertEqual(result, expected_result)
     
 
 

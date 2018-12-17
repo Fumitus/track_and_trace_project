@@ -16,15 +16,35 @@ def create_argument_parser():
     return parser
 
 
-def open_not_used_codes(filename="data/codes.txt"):
-    """
-    Function to read unique codes from a file
-    """
+# def open_not_used_codes(filename="data/codes.txt"):
+#     """
+#     Function to read unique codes from a file
+#     """
 
+#     with open(filename, "r") as f:
+#         lines = f.read().split("\n")
+#     return lines
+
+def code_management(filename="data/codes.txt", used_codes_filename="data/used_codes.txt"):
+    """
+    Function to read unique code from file
+    to delete used code from list
+    to create new file for used_codes registration
+    """
     with open(filename, "r") as f:
-        lines = f.read().split("\n")
-    return lines
-
+        contents = f.readlines()
+        # remove the line item from list, by line number, starts from 0 
+        # and returns it's value
+        pop_value = contents.pop(0)
+        n_lines = pop_value
+        
+        with open(used_codes_filename, "a") as f:
+            f.write(pop_value)
+        
+    with open(filename, "w") as f:
+        contents = "".join(contents)
+        f.write(contents)
+    return n_lines
 
 def join_product_code_data(name, batch, expire):
     """
@@ -39,7 +59,7 @@ def join_product_code(product, lines):
     Function to produce `product_code` 
     from uniques code and data from input
     """
-    first_line = lines[0]
+    first_line = lines
     product_code = product + "/" + first_line
     return product_code
 
@@ -65,33 +85,39 @@ def create_pallet_code(product, lines):
     return pallet_code
 
 
-def create_used_codes_reg(new_filename="data/used_codes.txt"):
+# def create_used_codes_reg(new_filename="data/used_codes.txt"):
+#     """
+#     Function to register used unique codes.
+#     """
+
+#     lines = open_not_used_codes()
+#     n_lines = lines[0]
+#     with open(new_filename, "a") as f:
+#         f.write(n_lines + "\n")
+#     return n_lines
+
+def stuff():
     """
-    Function to register used unique codes.
+    Funtion to group product_codes and assign to box_code
+    and latter group box_codes and assign to pallet_code
     """
+    pass 
 
-    lines = open_not_used_codes()
-    n_lines = lines[0]
-    with open(new_filename, "a") as f:
-        f.write(n_lines + "\n")
-    return n_lines
+# def delete_used_codes(filename="data/codes.txt"):
+#     """
+#     Function to delete used unique codes 
+#     from a not used codes list.
+#     """
+#     with open(filename, "r") as f:
+#         contents = f.readlines()
+#         # remove the line item from list, by line number, starts from 0
+#         contents.pop(0)
 
+#     with open(filename, "w") as f:
+#         contents = "".join(contents)
+#         f.write(contents)
 
-def delete_used_codes(filename="data/codes.txt"):
-    """
-    Function to delete used unique codes 
-    from a not used codes list.
-    """
-    with open(filename, "r") as f:
-        contents = f.readlines()
-        # remove the line item from list, by line number, starts from 0
-        contents.pop(0)
-
-    with open(filename, "w") as f:
-        contents = "".join(contents)
-        f.write(contents)
-
-    return filename
+#     return filename
 
 
 def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"):
@@ -99,7 +125,7 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
     Function to create .txt and record 
     unique product codes to it.
     """
-    # product_code_lines = product_code
+    product_code_lines = product_code
     with open(new_filename, "a") as f:
         f.write(product_code + "\n")
 
@@ -140,10 +166,10 @@ def main(passed_args=None):
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
 
-    lines = open_not_used_codes()
-    product_code = join_product_code(product, lines)
-    delete_used_codes()
-    create_used_codes_reg()
+    lines = code_management()
+    # product_code = join_product_code(product, lines)
+    # delete_used_codes()
+    # create_used_codes_reg()
     product_code_lines = create_product_codes_reg(product_code=product)
     # Track_data_csv()
 
