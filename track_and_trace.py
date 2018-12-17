@@ -34,6 +34,16 @@ def join_product_code_data(name, batch, expire):
     return product
 
 
+def join_product_code(lines, product):
+    """"
+    Function to produce `product_code` 
+    from uniques code and data from input
+    """
+    first_line = lines[0]
+    product_code = product + "/" + first_line
+    return product_code
+
+
 def create_box_code(product, lines, box_size=3):
     """"
     Function to produce `box_code` 
@@ -42,16 +52,6 @@ def create_box_code(product, lines, box_size=3):
     first_line = lines[0]
     box_code = product + "/" + first_line + "/box"
     return box_code
-
-
-def join_product_code(product, lines):
-    """"
-    Function to produce `product_code` 
-    from uniques code and data from input
-    """
-    first_line = lines[0]
-    product_code = product + "/" + first_line
-    return product_code
 
 
 def create_pallet_code(product, lines, box_size=3):
@@ -99,14 +99,14 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
     Function to create .txt and record 
     unique product codes to it.
     """
-    product_code_lines = product_code
+    # product_code_lines = product_code
     with open(new_filename, "a") as f:
         f.write(product_code + "\n")
 
     return product_code_lines
 
 
-def TaT_data_csv(filename="data/Tat_data.csv", pallet_code=None):
+def Track_data_csv(lines, product_code_lines, box_code, pallet_code, filename="data/Track_data.csv"):
     """
     Function to create .csv file and record 
     1. used unique codes from file
@@ -140,10 +140,11 @@ def main(passed_args=None):
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
     lines = open_not_used_codes()
+    product_code = join_product_code(product, lines)
     delete_used_codes()
     create_used_codes_reg()
     product_code_lines = create_product_codes_reg(product_code=product)
-    # TaT_data_csv()
+    # Track_data_csv()
 
 
 if __name__ == "__main__":
