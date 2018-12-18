@@ -2,6 +2,7 @@ import sys
 import argparse
 import csv
 import os.path
+import json
 
 
 def create_argument_parser():
@@ -123,12 +124,20 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
-    code = code_management()
-    product_code = join_product_code(product, code)
-    
-    # create_used_codes_reg()
-    create_product_codes_reg(product_code)
-    track_data_csv(code, product_code, 'box_code', 'pallet_code')
+    codes = code_management()
+    product_codes = []
+    for i in codes:
+        if i == 0:
+            box_code = create_box_code(product, codes[i])
+        else:
+            product_codes.append(join_product_code(product, codes[i]))
+
+    jsonObject = {}
+    jsonObject[box_code] = product_codes
+    json.dump(jsonObject)
+    # product_code = join_product_code(product, code)
+    # create_product_codes_reg(product_code)
+    # track_data_csv(code, product_code, 'box_code', 'pallet_code')
 
 
 if __name__ == "__main__":
