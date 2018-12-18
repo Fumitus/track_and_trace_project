@@ -49,7 +49,7 @@ def join_product_code(product, lines):
     Function to produce `product_code` 
     from uniques code and data from input
     """
-    first_line = lines
+    first_line = str(lines)
     product_code = product + "/" + first_line
     return product_code
 
@@ -126,12 +126,11 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
-
     lines = code_management()
-    # product_code = join_product_code(product, lines)
-    # delete_used_codes()
+    product_code = join_product_code(product, lines)
+    
     # create_used_codes_reg()
-    product_code_lines = create_product_codes_reg(product_code=product)
+    product_code_lines = create_product_codes_reg(product_code)
     # Track_data_csv()
 
 
