@@ -8,10 +8,10 @@ class TestCase(unittest.TestCase):
         self.assertEqual(result, 'abc')
         print(result)
 
-    def test_code_management(self):
-        result = track_and_trace.code_management("data/test_codes.txt")
-        self.assertEqual(result,'100097')
-        print(result)
+    # def test_code_management(self):
+    #     result = track_and_trace.code_management("data/test_codes.txt")
+    #     self.assertEqual(result,'100097')
+    #     print(result)
 
     # def test_code_management(self):
     #     with open("data/test_codes.txt", "r") as f:
@@ -26,7 +26,7 @@ class TestCase(unittest.TestCase):
         #     print(result)
 
     def test_join_product_code(self):
-        result = track_and_trace.join_product_code('a', '1')
+        result = track_and_trace.join_product_code('a', 1)
         self.assertEqual(result, 'a/1')
         print(result)
 

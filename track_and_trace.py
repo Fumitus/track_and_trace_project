@@ -26,7 +26,7 @@ def code_management(filename="data/codes.txt", used_codes_filename="data/used_co
         # remove the line item from list, by line number, starts from 0 
         # and returns it's value
         pop_value = contents.pop(0)
-        lines = pop_value.strip()
+        code = pop_value.strip()
         
         with open(used_codes_filename, "a") as f:
             f.write(pop_value)
@@ -34,7 +34,7 @@ def code_management(filename="data/codes.txt", used_codes_filename="data/used_co
     with open(filename, "w") as f:
         contents = "".join(contents)
         f.write(contents)
-    return lines
+    return code
 
 def join_product_code_data(name, batch, expire):
     """
@@ -44,32 +44,31 @@ def join_product_code_data(name, batch, expire):
     return product
 
 
-def join_product_code(product, lines):
+def join_product_code(product, code):
     """"
     Function to produce `product_code` 
     from uniques code and data from input
     """
-    first_line = str(lines)
+    first_line = str(code)
     product_code = product + "/" + first_line
     return product_code
 
 
-def create_box_code(product, lines):
+def create_box_code(product, code):
     """"
     Function to produce `box_code` 
     from uniques code, data from input and box size.
     """
-    first_line = lines
+    first_line = code
     box_code = product + "/" + first_line + "/box"
     return box_code
 
-
-def create_pallet_code(product, lines):
+def create_pallet_code(product, code):
     """"
     Function to produce `pallet_code` 
     from uniques code, data from input and pallet size.
     """
-    first_line = lines[0]
+    first_line = code
 
     pallet_code = product + "/" + first_line + "/pallet"
     return pallet_code
@@ -90,10 +89,8 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
     with open(new_filename, "a") as f:
         f.write(product_code_lines + "\n")
 
-    return product_code_lines
 
-
-def Track_data_csv(lines, product_code_lines, box_code, pallet_code, filename="data/Track_data.csv"):
+def track_data_csv(code, product_code_lines, box_code, pallet_code, filename="data/Track_data.csv"):
     """
     Function to create .csv file and record 
     1. used unique codes from file
@@ -114,7 +111,7 @@ def Track_data_csv(lines, product_code_lines, box_code, pallet_code, filename="d
 
         writer.writerow(
             {
-                "codes": lines[0],
+                "codes": code,
                 "product_codes": product_code_lines,
                 "box_codes": box_code,
                 "pallet_codes": pallet_code,
@@ -126,12 +123,12 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
-    lines = code_management()
-    product_code = join_product_code(product, lines)
+    code = code_management()
+    product_code = join_product_code(product, code)
     
     # create_used_codes_reg()
-    product_code_lines = create_product_codes_reg(product_code)
-    # Track_data_csv()
+    create_product_codes_reg(product_code)
+    track_data_csv(code, product_code, 'box_code', 'pallet_code')
 
 
 if __name__ == "__main__":

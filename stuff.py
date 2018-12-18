@@ -1,7 +1,25 @@
+pallete_code = 
 box_list = ['APAP20181215202012/100,025/box'],
 product_code_list = ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']
+product_code_list[1]
 
-# expected_result = {'APAP20181215202012/100,025/box': ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']}
+expected_result = {'APAP20181215202012/100,025/box': ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']}
+expected_result['APAP20181215202012/100,025/box'][0]
+
+expected_result = {
+    **expected_result,
+    ['APAP20181215202012/100,025/box']: [
+      **expected_result['APAP20181215202012/100,025/box']
+    ]
+}
+
+expected_result['naujos_dezes_kodas']= []
+
+expected_result['naujos_dezes_kodas'].append('dezutes_koda')
+expected_result['naujos_dezes_kodas'].append('dezutes_koda')
+expected_result['naujos_dezes_kodas'].append('dezutes_koda')
+expected_result['naujos_dezes_kodas'].append('dezutes_koda')
+
 result = (box_list, product_code_list)
 
 print(result)
