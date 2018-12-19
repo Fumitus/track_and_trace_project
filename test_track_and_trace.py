@@ -31,6 +31,9 @@ class TestCase(unittest.TestCase):
         expected_result = {'APAP20181215202012/100,025/box': ['APAP20181212202012/100,027', 'APAP20181212202012/100,028', 'APAP20181212202012/100,029']}
         result = track_and_trace.product_code_group(box_code, product_code_list)
         self.assertEqual(result, expected_result)
+
+    def test_product_codes_to_list(self):
+        product = 
     
 
 
