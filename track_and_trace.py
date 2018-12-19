@@ -14,7 +14,10 @@ def create_argument_parser():
     parser.add_argument("name", help="Enter product name in Latin letters")
     parser.add_argument("batch", help="Product batch")
     parser.add_argument("expiration", help="Product expire date in format YYYY/MM")
+    parser.add_argument("box", help = "Determine box size. How much 'code' is put in one box")
     return parser
+
+
 
 def code_management(filename="data/codes.txt", used_codes_filename="data/used_codes.txt"):
     """
@@ -64,22 +67,29 @@ def create_box_code(product, code):
     box_code = product + "/" + first_line + "/box"
     return box_code
 
-def create_pallet_code(product, code):
-    """"
-    Function to produce `pallet_code` 
-    from uniques code, data from input and pallet size.
+def product_codes_to_list(product, code, box_size):
     """
-    first_line = code
+    Funtion to join product_codes to a list
+    """
+    product_codes_list = []
+    size = len(box_size + 2)
+    codes = code[:size]
+    for code in codes:
+        if code == 0:
+            box_code = create_box_code(product, codes[code])
+        else:
+            product_codes_list.append(join_product_code(product, codes[code]))
+    
+    return product_codes_list, box_code
 
-    pallet_code = product + "/" + first_line + "/pallet"
-    return pallet_code
-
-def stuff():
+def product_code_group(box_code, product_codes_list):
     """
-    Funtion to group product_codes and assign to box_code
-    and latter group box_codes and assign to pallet_code
+    Function to create dictionary from 
+    box_code and product_codes_list
     """
-    pass 
+    box = {box_code:product_codes_list}
+    
+    return box
 
 def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"):
     """
@@ -91,20 +101,19 @@ def create_product_codes_reg(product_code, new_filename="data/product_codes.txt"
         f.write(product_code_lines + "\n")
 
 
-def track_data_csv(code, product_code_lines, box_code, pallet_code, filename="data/Track_data.csv"):
+def track_data_csv(code, product_code_lines, box_code, filename="data/Track_data.csv"):
     """
     Function to create .csv file and record 
     1. used unique codes from file
     2. generated unique product_codes
     3. box_codes
-    4. pallete_codes
     """
 
     file_exist = os.path.isfile(filename)
 
     with open(filename, "a", newline="") as csvfile:
 
-        headers = ["codes", "product_codes", "box_codes", "pallet_codes"]
+        headers = ["codes", "product_codes", "box_codes"]
         writer = csv.DictWriter(csvfile, fieldnames=headers)
 
         if not file_exist:
@@ -115,7 +124,6 @@ def track_data_csv(code, product_code_lines, box_code, pallet_code, filename="da
                 "codes": code,
                 "product_codes": product_code_lines,
                 "box_codes": box_code,
-                "pallet_codes": pallet_code,
             }
         )
 
@@ -124,20 +132,18 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
-    codes = code_management()
-    product_codes = []
-    for i in codes:
-        if i == 0:
-            box_code = create_box_code(product, codes[i])
-        else:
-            product_codes.append(join_product_code(product, codes[i]))
+    box_size = int(args.box)
+    code = code_management()
 
-    jsonObject = {}
-    jsonObject[box_code] = product_codes
-    json.dump(jsonObject)
-    # product_code = join_product_code(product, code)
-    # create_product_codes_reg(product_code)
-    # track_data_csv(code, product_code, 'box_code', 'pallet_code')
+    product_codes_list = product_codes_to_list(product, code, box_size)
+    
+    product_codes_to_list, box_code = product_codes_to_list(product, code, box_size)
+    
+    box = product_code_group(box_code, product_codes_list)
+
+    product_code = join_product_code(product, code)
+    create_product_codes_reg(product_code)
+    track_data_csv(code, product_code, box_code)
 
 
 if __name__ == "__main__":
