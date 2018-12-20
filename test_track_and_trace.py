@@ -8,10 +8,12 @@ class TestCase(unittest.TestCase):
         self.assertEqual(result, 'abc')
         print(result)
 
-    def test_batch_lenth(self):
-        data = ["", "", "", ""]
-        expected = len(data[1])
-
+    def test_read_codes(self):
+        box_size = 6
+        filename = "data/codes.txt"
+        expected_result = ['100102', '100103', '100104', '100105', '100106', '100107']
+        result = track_and_trace.read_codes(box_size, filename)
+        self.assertEqual(result, expected_result)
 
     def test_join_product_code(self):
         result = track_and_trace.join_product_code('a', 1)
@@ -33,8 +35,15 @@ class TestCase(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_product_codes_to_list(self):
-        product = 
-    
+        product = 'a'
+        codes = ['1', '2', '3', '4', '5', '6']
+        
+        expected_result = ['a/2', 'a/3', 'a/4', 'a/5', 'a/6'], 'a/1/box'
+        result = track_and_trace.product_codes_to_list(product, codes)
+        print(expected_result)
+        print(result)
+        self.assertEqual(result, expected_result)
+            
 
 
 unittest.main()
