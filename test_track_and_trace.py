@@ -7,7 +7,8 @@ class TestCase(unittest.TestCase):
         result = track_and_trace.join_product_code_data('a', 'b', 'c')
         self.assertEqual(result, 'abc')
         print(result)
-
+  
+        
     def test_read_codes(self):
         box_size = 6
         filename = "data/codes.txt"
