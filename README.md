@@ -10,9 +10,12 @@ Kodų panaudojimo sekimo programa. Gaunas riboto naudojimo kodų kiekis. Kodus r
 
 ## Naudojimas
 
-`python track_and_track.py  pavadinimas serija galiojimo_laikas --nepanaudoti=nepanaudoti.txt --output=panaudoti.txt`
-`python track_and_track.py Pavadinimas 2020-20-20 202012 6 --nepanaudoti=nepanaudoti.txt --output=panaudoti.txt`
-Ši komanda turėtų iš `codes.txt` failo nuskaityti vieną nepanaudotą kodą ir sukurti naują eilutę faile `used_codes.txt`. Taip pat sukuria naują `product_code` eilutę `product_codes.txt` faile. Papildomai sukuriamas `Tat_data.csv` kuriame kaskart sugeneravus kodą yra įrašoma papildoma eilutė (append) iš `codes`, `product_codes`, `box_codes`.
+`python track_and_track.py  pavadinimas serija galiojimo_laikas dėžės_dydis (dėžė apibrėžta nuo 2 iki 10 kodų taupant codes.txt faile esančius kodus)
+pvz.:
+
+> python track_and_track.py Pavadinimas 2020-20-20 202012 6 
+
+Ši komanda turėtų iš `codes.txt` failo nuskaityti vieną nepanaudotą kodą ir sukurti naują eilutę faile `used_codes.txt`. Taip pat sukuria naują `product_code_group` eilutę `product_codes.txt` faile. Ši eilutė turi duomenis kokioje dėžutėje su unikaliu kodu yra užregistruoti unikalūs `product_code`.
 
 Tarkime, jog turėjome du nepanaudotus kodus. 000000 ir 000001.
 Paleidus aukščiau parašytą komandą `codes.txt` turinys turėtų pasikeisti į:
@@ -26,13 +29,19 @@ Tuo tarpu `used_codes.txt` turinys turėjo tapti:
 ```txt
 000000
 ```
+Taip pat `product_codes.txt` pasipildo nauja eilute pvz. :
+`{'Morfin2018-12-212020-12/`000000`/box': ['Morfin2018-12-212020-12/`000001`']}`
 
 ## Product Code grupavimas
 
-- sukurti funkciją kuri pagal apibrėžtą dėžės dydį pirmą `Product Code` sunaudos `Box_code` sukūrimui, o likusius kodus `Product_code` sukūrimui.
-- bus sukuriamas kodų rinkinys kuris parodo kiek product_code yra sutalpinta viename `Box_code` {'Box_code': ['Product_code1','Product_code2']}
+- funkcija kuri pagal apibrėžtą dėžės dydį pirmą `Product Code` sunaudos `box_code` sukūrimui, o likusius kodus `product_code` sukūrimui.
+- bus sukuriamas kodų rinkinys kuris parodo kiek product_code yra sutalpinta viename `box_code` `{'Box_code': ['Product_code1','Product_code2']}`
 
-- Išsaugoti `product_codes.txt` failą su `Box_Code` ir `product_code`.
+pvz.:
+
+`{'Morfin2018-12-212020-12/100171/box': ['Morfin2018-12-212020-12/100172']}`
+
+- Gautos eilutės išsaugomos `product_codes.txt`.
 
 
 
