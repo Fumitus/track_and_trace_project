@@ -38,7 +38,7 @@ def create_used_codes_reg(box_size, filename="data/codes.txt", new_filename="dat
     with open(filename, "r") as f:
         contents = f.readlines()
         # remove the line item from list, by line number, starts from 0
-        range_to_delete = int(box_size)+1
+        range_to_delete = int(box_size)
         del contents[range_to_delete:]
         
     with open(new_filename, "a") as f:
@@ -53,7 +53,7 @@ def delete_codes(box_size, filename="data/codes.txt"):
     with open(filename, "r") as f:
         contents = f.readlines()
         # remove the line item from list, by line number, starts from 0
-        range_to_delete = int(box_size)+1
+        range_to_delete = int(box_size)
         del contents[:range_to_delete]
         
     with open(filename, "w") as f:
@@ -126,7 +126,7 @@ def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
     product = join_product_code_data(args.name, args.batch, args.expiration)
-    box_size = int(args.box)
+    box_size = args.box
     codes = read_codes(box_size)
     create_used_codes_reg(box_size)
     product_codes_list, box_code = product_codes_to_list(product, codes)    
