@@ -22,16 +22,14 @@ def read_codes(box_size, filename="data/codes.txt"):
     Function to read unique code from file
     range is defined according "box" size on input
     """
-    if box_size in range(10):
-
+    if box_size == 1:
+        sys.exit('Error: Box_size should be in range from 2 to 10')
+    elif box_size in range(10):
+           
         with open(filename, "r") as f:
             contents = f.read().splitlines()
             codes = contents[:box_size]
-        return codes
-        
-    else:        
-        
-        sys.exit('Error: Box_size should be in range from 2 to 10')              
+        return codes     
 
 def create_used_codes_reg(box_size, filename="data/codes.txt", new_filename="data/used_codes.txt"):
     """
