@@ -22,7 +22,7 @@ def read_codes(box_size, filename="data/codes.txt"):
     Function to read unique code from file
     range is defined according "box" size on input
     """
-    if box_size <=6:
+    if box_size in range(10):
 
         with open(filename, "r") as f:
             contents = f.read().splitlines()
@@ -31,7 +31,7 @@ def read_codes(box_size, filename="data/codes.txt"):
         
     else:        
         
-        sys.exit('Error: Box_size should be in range from 1 to 6')              
+        sys.exit('Error: Box_size should be in range from 2 to 10')              
 
 def create_used_codes_reg(box_size, filename="data/codes.txt", new_filename="data/used_codes.txt"):
     """
@@ -95,19 +95,14 @@ def product_codes_to_list(product, codes):
     """
     
     box_code = create_box_code(product, codes[0])
-    print(codes) 
     product_codes_list = []
-    code =  codes
-    for i in code:
-        print(i)
-        product_codes_list.append(join_product_code(product, code[i]))
+       
+    for i in range(len(codes)):
+        if i == 0:
+            box_code = create_box_code(product, codes[i])
+        else:
+            product_codes_list.append(join_product_code(product, codes[i]))
     
-    # product_codes_list.append(join_product_code(product, codes[1]))
-    # product_codes_list.append(join_product_code(product, codes[2]))
-    # product_codes_list.append(join_product_code(product, codes[3]))
-    # product_codes_list.append(join_product_code(product, codes[4]))
-    # product_codes_list.append(join_product_code(product, codes[5]))
-
     return product_codes_list, box_code
 
 def product_code_group(box_code, product_codes_list):
@@ -116,6 +111,7 @@ def product_code_group(box_code, product_codes_list):
     box_code and product_codes_list
     """
     box = {box_code:product_codes_list}
+    print(box)
     return box
 
 def create_product_codes_reg(box, new_filename="data/product_codes.txt"):
@@ -131,10 +127,8 @@ def create_product_codes_reg(box, new_filename="data/product_codes.txt"):
 def main(passed_args=None):
     argument_parser = create_argument_parser()
     args = argument_parser.parse_args()
-        
     product = join_product_code_data(args.name, args.batch, args.expiration)
     box_size = int(args.box)
-    
     codes = read_codes(box_size)
     create_used_codes_reg(box_size)
     product_codes_list, box_code = product_codes_to_list(product, codes)    

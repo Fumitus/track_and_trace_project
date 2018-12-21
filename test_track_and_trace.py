@@ -37,9 +37,9 @@ class TestCase(unittest.TestCase):
 
     def test_product_codes_to_list(self):
         product = 'a'
-        codes = ['1', '2', '3', '4', '5', '6']
+        codes = ['123', '456', '789', '101112', '131415', '161718']
         
-        expected_result = ['a/2', 'a/3', 'a/4', 'a/5', 'a/6'], 'a/1/box'
+        expected_result = ['a/456', 'a/789', 'a/101112', 'a/131415', 'a/161718'], 'a/123/box'
         result = track_and_trace.product_codes_to_list(product, codes)
         print(expected_result)
         print(result)
