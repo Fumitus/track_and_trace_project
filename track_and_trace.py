@@ -131,7 +131,7 @@ def create_json_file(box):
 
 def read_json_file(json_file="data/box_result.json"):
     with open (json_file, "r") as content:
-        json.load(content+'\n')
+        json.load(content)
 
 
 def main(passed_args=None):
