@@ -41,7 +41,7 @@ pvz.:
 
 `{'Morfin2018-12-212020-12/100171/box': ['Morfin2018-12-212020-12/100172']}`
 
-- Gautos eilutės išsaugomos `product_codes.txt`.
+- Gautos eilutės išsaugomos `product_codes.txt`, `box_result.json`.
 
 
 
