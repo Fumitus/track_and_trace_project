@@ -3,6 +3,8 @@ import argparse
 import csv
 import os.path
 import json
+import sqlite3
+from sqlite3 import Error
 
 
 def create_argument_parser():
@@ -129,6 +131,16 @@ def create_json_file(box):
     with open("data/box_result.json", "a") as fp:
         json.dump(box, fp)
 
+def create_connection(db_file):
+    """ create a database connection to a SQLite database"""
+    try:
+        conn = sqlite3.connect(db_file)
+        print(sqlite3.version)
+    except Error as e:
+        print(e)
+    finally:
+        conn.close()
+        
 def read_json_file(json_file="data/box_result.json"):
     with open (json_file, "r") as content:
         json.load(content)
@@ -145,6 +157,7 @@ def main(passed_args=None):
     box = product_code_group(box_code, product_codes_list)
     create_product_codes_reg(box)
     delete_codes(box_size)
+    create_connection("data/sqlite.db")
     create_json_file(box)
 
 
