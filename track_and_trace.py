@@ -25,7 +25,7 @@ def read_codes(box_size, filename="data/codes.txt"):
     """
     if box_size == 1:
         sys.exit('Error: Box_size should be in range from 2 to 10')
-    elif box_size in range(10):
+    elif box_size in range(11):
            
         with open(filename, "r") as f:
             contents = f.read().splitlines()
