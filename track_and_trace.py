@@ -190,15 +190,16 @@ def main(passed_args=None):
     database = "data/sqlite_track_and_trace.db"
     sql_create_product_table = """ CREATE TABLE IF NOT EXISTS product_table (
                                         id integer PRIMARY KEY,
-                                        product name,
-                                        product batch
+                                        product_name,
+                                        product_batch
                                     ); """
     sql_create_box_table = """ CREATE TABLE IF NOT EXISTS box_table (
                                         id integer PRIMARY KEY,
                                         box,
                                         codes,
                                         product_codes_list,
-                                        box_code
+                                        box_code,
+                                        project_id
                                     );"""
     
     conn = create_connection(database)
@@ -217,7 +218,7 @@ def main(passed_args=None):
 
         # create a new task for product batch
 
-        task = (box, codes, product_codes_list, box_code, project_id)
+        task = (str(box), str(codes), str(product_codes_list), str(box_code), str(project_id))
         create_task(conn, task)
 
 
