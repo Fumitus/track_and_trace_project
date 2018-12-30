@@ -138,7 +138,7 @@ def create_connection(db_file):
         print(e)
     return None
 
-def create_box_table(conn, create_table_sql):
+def create_table(conn, create_table_sql):
     """ create a table from the create_table_sql statement
     :param conn: Connection object
     :param create_table_sql: a CREATE TABLE statement
@@ -149,7 +149,32 @@ def create_box_table(conn, create_table_sql):
         c.execute(create_table_sql)
     except Error as e:
         print(e)
-        
+
+def create_project(conn, project):
+    """
+    Create a new project into the box_table
+    :param conn:
+    :param project:
+    :return: project id
+    """
+    sql = '''INSERT INTO product_table(product_name, product_batch)
+            VALUES(?,?)'''
+    cur = conn.cursor()
+    cur.execute(sql, project)
+    return cur.lastrowid
+
+def create_task(conn, task):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+    sql = '''INSERT INTO box_table(box, codes, product_codes_list,box_code, project_id)
+            VALUES(?,?,?,?,?)'''
+    cur = conn.cursor()
+    cur.execute(sql, task)
+    return cur.lastrowid
 
 def main(passed_args=None):
     argument_parser = create_argument_parser()
@@ -163,24 +188,37 @@ def main(passed_args=None):
     create_product_codes_reg(box)
     delete_codes(box_size)
     database = "data/sqlite.db"
+    sql_create_product_table = """ CREATE TABLE IF NOT EXISTS product_table (
+                                        product name,
+                                        product batch
+                                    ); """
     sql_create_box_table = """ CREATE TABLE IF NOT EXISTS box_table (
                                         box,
                                         codes,
                                         product_codes_list,
                                         box_code
-                                    ); """
- 
+                                    );"""
     
     conn = create_connection(database)
     if conn is not None:
-        # create projects table
+        # create product_table
+        create_table(conn, sql_create_product_table)
+        # create box_table
         create_table(conn, sql_create_box_table)
-        
     else:
         print("Error! Cannot create the database connection.")
 
+    with conn:
+        #create a new project for product
+        project = (args.name, args.batch)
+        project_id = create_project(conn, project)
+
+        # create a new task for product batch
+
+        task = (box, codes, product_codes_list, box_code, project_id)
+        create_task(conn, task)
+
+
     
-
-
 if __name__ == "__main__":
     main()
