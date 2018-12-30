@@ -187,7 +187,7 @@ def main(passed_args=None):
     box = product_code_group(box_code, product_codes_list)
     create_product_codes_reg(box)
     delete_codes(box_size)
-    database = "data/sqlite.db"
+    database = "data/sqlite_track_and_trace.db"
     sql_create_product_table = """ CREATE TABLE IF NOT EXISTS product_table (
                                         product name,
                                         product batch
