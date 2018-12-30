@@ -124,12 +124,7 @@ def create_product_codes_reg(box, new_filename="data/product_codes.txt"):
     with open(new_filename, "a") as f:
         f.write(product_code_lines + "\n")
 
-def create_json_file(box):
-    """
-    Function to create json file
-    """
-    with open("data/box_result.json", "a") as fp:
-        json.dump(box, fp)
+
 
 def create_connection(db_file):
     """ create a database connection to a SQLite database
@@ -143,7 +138,7 @@ def create_connection(db_file):
         print(e)
     return None
 
-def create_table(conn, create_table_sql):
+def create_box_table(conn, create_table_sql):
     """ create a table from the create_table_sql statement
     :param conn: Connection object
     :param create_table_sql: a CREATE TABLE statement
@@ -155,10 +150,6 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
         
-def read_json_file(json_file="data/box_result.json"):
-    with open (json_file, "r") as content:
-        json.load(content)
-
 
 def main(passed_args=None):
     argument_parser = create_argument_parser()
@@ -188,7 +179,7 @@ def main(passed_args=None):
     else:
         print("Error! Cannot create the database connection.")
 
-    create_json_file(box)
+    
 
 
 if __name__ == "__main__":
